@@ -1,0 +1,29 @@
+spring:
+  jpa:
+    generate-ddl: "false"
+    database: postgresql
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: Asia/Yekaterinburg
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    show-sql: "true"
+    hibernate:
+      ddl-auto: none
+  datasource:
+    platform: postgres
+    tomcat:
+      initial-size: "1"
+    hikari:
+      connectionTimeout: "20000"
+      maximumPoolSize: "2"
+    url: jdbc:postgresql://${DB}/
+    username: ${USERNAME}
+    password: ${PASS}
+server:
+  port: "9090"
+  tomcat:
+    threads:
+      max: 4
+  error:
+    include-stacktrace: never
