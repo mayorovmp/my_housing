@@ -34,5 +34,4 @@ public class ReadingController {
         this.readingService.addReading(user.getUsername(), mapper.map(reading, ReadingEntity.class));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
 }
