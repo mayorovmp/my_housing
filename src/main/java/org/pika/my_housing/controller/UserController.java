@@ -2,6 +2,7 @@ package org.pika.my_housing.controller;
 
 import org.modelmapper.ModelMapper;
 import org.pika.my_housing.aspect.annotaion.LogExecutionTime;
+import org.pika.my_housing.dto.user.UserDto;
 import org.pika.my_housing.dto.user.UserLoginDto;
 import org.pika.my_housing.dto.user.UserRegisterDto;
 import org.pika.my_housing.service.UserService;
@@ -26,6 +27,13 @@ public class UserController {
     public ResponseEntity<String> getToken(@RequestBody UserLoginDto user) throws Exception {
         String token = userService.login(user.login, user.password);
         return new ResponseEntity<String>(token, HttpStatus.OK);
+    }
+
+    @PostMapping("/me")
+    public ResponseEntity<UserDto> me(@RequestBody UserLoginDto user) throws Exception {
+        var me = userService.findByLogin(user.login);
+        var dto = mapper.map(me, UserDto.class);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @PostMapping("/register")

@@ -28,7 +28,6 @@ public class ModelMapperConfig {
                 .setFieldMatchingEnabled(true)
                 .setSkipNullEnabled(true);
 
-        configureUser(mapper);
         configureService(mapper);
         configureBill(mapper);
         configureCounter(mapper);
@@ -36,15 +35,6 @@ public class ModelMapperConfig {
         configureReadingOnAddDto(mapper);
 
         return mapper;
-    }
-
-    private static void configureUser(ModelMapper mapper) {
-        Converter<String, String> toUppercase =
-                ctx -> ctx.getSource() == null ? null : ctx.getSource() + "eval";
-
-        mapper.typeMap(UserEntity.class, UserDto.class).addMappings(mp ->
-                mp.using(toUppercase)
-                        .map(UserEntity::getEmail, UserDto::setEmail));
     }
 
     private static void configureBill(ModelMapper modelMapper) {
